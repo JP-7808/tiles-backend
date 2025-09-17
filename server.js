@@ -4,6 +4,7 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import dotenv from "dotenv";
 import authRoutes from './routes/auth.js';
+import addressesRoutes from './routes/addresses.js'
 
 dotenv.config();
 const app = express();
@@ -35,6 +36,7 @@ app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 
 app.use('/api/auth', authRoutes);
+app.use('/api/addresses', addressesRoutes);
 
 // Error handling middleware
 app.use((err, req, res, next) => {

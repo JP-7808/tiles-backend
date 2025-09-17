@@ -1,4 +1,3 @@
-// models/Product.js
 import mongoose from 'mongoose';
 
 const productSchema = new mongoose.Schema({
@@ -53,27 +52,27 @@ const productSchema = new mongoose.Schema({
     }
   }],
   specifications: {
-    size: {
-      length: Number,
-      width: Number,
-      thickness: Number,
-      unit: {
-        type: String,
-        default: 'cm'
-      }
+    type: {
+      size: {
+        length: { type: Number, required: false },
+        width: { type: Number, required: false },
+        thickness: { type: Number, required: false },
+        unit: { type: String, default: 'cm', required: false }
+      },
+      area: [{ type: String, required: false }],
+      design: [{ type: String, required: false }],
+      type: [{ type: String, required: false }],
+      color: [{ type: String, required: false }],
+      finish: [{ type: String, required: false }],
+      brand: { type: String, required: false },
+      material: { type: String, required: false },
+      waterAbsorption: { type: String, required: false },
+      frostResistance: { type: Boolean, required: false },
+      slipResistance: { type: String, required: false },
+      chemicalResistance: { type: String, required: false },
+      recommendedUsage: [{ type: String, required: false }]
     },
-    area: [String],
-    design: [String],
-    type: [String],
-    color: [String],
-    finish: [String],
-    brand: String,
-    material: String,
-    waterAbsorption: String,
-    frostResistance: Boolean,
-    slipResistance: String,
-    chemicalResistance: String,
-    recommendedUsage: [String]
+    default: {} // Default to an empty object if no specifications are provided
   },
   stock: {
     type: Number,

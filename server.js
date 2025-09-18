@@ -32,7 +32,7 @@ const connect = async () => {
 // Middleware
 app.use(
   cors({
-    origin: process.env.CLIENT_URL || "http://localhost:3000", // Restrict to specific client URL
+    origin: "*", // Restrict to specific client URL
     methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
     credentials: true,
   })

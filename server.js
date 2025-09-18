@@ -8,6 +8,9 @@ import addressesRoutes from './routes/addresses.js';
 import adminRoutes from './routes/admin.js';
 import cartRoutes from './routes/cart.js';
 import wishlistRoutes from './routes/wishlist.js';
+import filterRoutes from './routes/filter.js';
+import reviewRoutes from './routes/reviews.js';
+import searchRoutes from './routes/search.js';
 
 dotenv.config();
 const app = express();
@@ -43,6 +46,9 @@ app.use('/api/addresses', addressesRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/cart', cartRoutes);
 app.use('/api/wishlist', wishlistRoutes);
+app.use('/api/filter', filterRoutes);
+app.use('/api/reviews', reviewRoutes);
+app.use('/api/search', searchRoutes);
 
 // Error handling middleware
 app.use((err, req, res, next) => {

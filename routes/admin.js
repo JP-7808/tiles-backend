@@ -6,6 +6,10 @@ import {
   createProduct,
   updateProduct,
   deleteProduct,
+  getProducts,
+  getProductById,
+  updateProductImage,
+  deleteProductImage,
   getOrders,
   updateOrder,
   createCategory,
@@ -19,11 +23,9 @@ import {
   deleteReview,
   getWishlists,
   deleteWishlist,
-  getProducts,
-  getProductById,
 } from '../controllers/adminController.js';
 import { protect, admin } from '../middleware/authMiddleware.js';
-import { upload } from '../config/cloudinary.js';
+import { upload, productUpload } from '../config/cloudinary.js';
 
 const router = express.Router();
 
@@ -37,11 +39,18 @@ router.route('/users/:id')
 // Product routes
 router.route('/products')
   .get(protect, admin, getProducts)
-  .post(protect, admin, upload.array('images', 5), createProduct);
+  .post(protect, admin, productUpload.array('images', 10), createProduct);
+
 router.route('/products/:id')
   .get(protect, admin, getProductById)
-  .put(protect, admin, upload.array('images', 5), updateProduct)
+  .put(protect, admin, productUpload.array('images', 10), updateProduct)
   .delete(protect, admin, deleteProduct);
+
+router.route('/products/:id/images')
+  .put(protect, admin, productUpload.single('image'), updateProductImage);
+
+router.route('/products/:id/images/:imageIndex')
+  .delete(protect, admin, deleteProductImage);
 
 // Order routes
 router.route('/orders')

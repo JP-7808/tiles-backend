@@ -38,4 +38,34 @@ const upload = multer({
   }
 });
 
-export { cloudinary, upload };
+
+// Add product-specific storage configuration
+const productStorage = new CloudinaryStorage({
+  cloudinary: cloudinary,
+  params: {
+    folder: 'tilecraft/products',
+    allowed_formats: ['jpg', 'jpeg', 'png', 'webp'],
+    transformation: [
+      { width: 1200, height: 1200, crop: 'limit' },
+      { quality: 'auto' },
+      { format: 'webp' }
+    ]
+  },
+});
+
+
+const productUpload = multer({ 
+  storage: productStorage,
+  limits: {
+    fileSize: 10 * 1024 * 1024, // 10MB limit for product images
+  },
+  fileFilter: (req, file, cb) => {
+    if (file.mimetype.startsWith('image/')) {
+      cb(null, true);
+    } else {
+      cb(new Error('Only image files are allowed!'), false);
+    }
+  }
+});
+
+export { cloudinary, upload, productUpload };

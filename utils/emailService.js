@@ -1,8 +1,7 @@
+// emailService.js
 import nodemailer from 'nodemailer';
-
-import dotenv from "dotenv"
+import dotenv from 'dotenv';
 dotenv.config();
-
 
 const transporter = nodemailer.createTransport({
   host: process.env.EMAIL_HOST,
@@ -13,7 +12,8 @@ const transporter = nodemailer.createTransport({
   }
 });
 
-export default const sendEmail = async (options) => {
+// define the function
+const sendEmail = async (options) => {
   const mailOptions = {
     from: process.env.EMAIL_FROM,
     to: options.email,
@@ -24,3 +24,6 @@ export default const sendEmail = async (options) => {
 
   await transporter.sendMail(mailOptions);
 };
+
+// export it as default
+export default sendEmail;

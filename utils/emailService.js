@@ -13,7 +13,7 @@ const transporter = nodemailer.createTransport({
   }
 });
 
-export const sendEmail = async (options) => {
+export default const sendEmail = async (options) => {
   const mailOptions = {
     from: process.env.EMAIL_FROM,
     to: options.email,

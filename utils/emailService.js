@@ -4,6 +4,16 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const sendEmail = async (options) => {
+
+  // --- START DIAGNOSTIC LOGS ---
+  console.log('--- Nodemailer Configuration ---');
+  console.log('Host:', process.env.EMAIL_HOST);
+  console.log('Port:', process.env.EMAIL_PORT);
+  console.log('User:', process.env.EMAIL_USER);
+  // Do NOT log the password, just check if it exists
+  console.log('Password Set:', !!process.env.EMAIL_PASS); 
+  console.log('------------------------------');
+  // --- END DIAGNOSTIC LOGS ---
   // Use port 465 for a secure SSL connection
   const transporter = nodemailer.createTransport({
     host: process.env.EMAIL_HOST,
